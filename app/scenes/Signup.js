@@ -66,6 +66,7 @@ class Signup extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation
     return(
       <Wrapper>
         <Form>
@@ -85,7 +86,7 @@ class Signup extends React.Component {
             secureTextEntry
           />
         </Form>
-        <SignupButton onPress={this.handleLoginPress}><SignupText>Register</SignupText></SignupButton>
+        <SignupButton onPress={this.handleRegisterPress}><SignupText>Register</SignupText></SignupButton>
       </Wrapper>
     )
   }

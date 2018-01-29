@@ -5,11 +5,11 @@ import Signup from './app/scenes/Signup'
 import { StackNavigator } from 'react-navigation';
 
 const RootNavigator = StackNavigator({
-  Signup: {
-    screen: Signup,
-  },
   Login: {
     screen: Login,
+  },
+  Signup: {
+    screen: Signup,
   },
 })
 

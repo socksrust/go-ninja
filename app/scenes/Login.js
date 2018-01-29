@@ -87,6 +87,7 @@ class Home extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation
     return(
       <Wrapper>
         <Header>
@@ -103,7 +104,7 @@ class Home extends React.Component {
             placeholder='Password'
             secureTextEntry
           />
-          <GoButton><FormMessage>Not registered yet? <SpanRed>Sign up</SpanRed> here!</FormMessage></GoButton>
+          <GoButton onPress={() => navigate('Signup')}><FormMessage>Not registered yet? <SpanRed>Sign up</SpanRed> here!</FormMessage></GoButton>
         </Form>
         <LoginButton onPress={this.handleLoginPress}><LoginText>Login</LoginText></LoginButton>
       </Wrapper>
