@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
 import styled from 'styled-components/native'
-// import RedInput from '../components/utils/red-input'
+import RedInput from '../components/red-input'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
 import { fetchQuestions } from '../redux/actions/quizz-actions'
@@ -42,6 +42,7 @@ const Form = styled.View`
   align-items: center;
   background-color: #ffffff;
   margin-vertical: 20px;
+  margin-horizontal: 30px;
 `
 
 const FormTitle = styled.Text`
@@ -94,12 +95,11 @@ class Home extends React.Component {
         </Header>
         <Form>
           <FormTitle>Welcome back!</FormTitle>
-          <TextInput
-            style={{height: 40, borderBottomColor: 'gray', borderWidth: 1, width: '100%'}}
+          <RedInput
+            selectTextOnFocus
             placeholder='Login'
           />
-          <TextInput
-            style={{height: 40, borderBottomColor: 'gray', borderWidth: 1, width: '100%'}}
+          <RedInput
             placeholder='Password'
             secureTextEntry
           />
