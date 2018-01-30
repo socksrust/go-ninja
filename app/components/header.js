@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Wrapper = styled.View`
   height: 70px;
-  background-color: black;
+  background-color: ${theme.background};
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -21,6 +21,7 @@ const Logo = styled.Text`
   font-size: 35px;
   color: #ffffff;
   margin-right: auto;
+  margin-left: -45px;
 `
 
 const BoldSpan = styled.Text`

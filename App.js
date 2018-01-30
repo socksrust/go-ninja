@@ -7,15 +7,35 @@ import {
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
 import { store } from './app/redux/store.js';
+import { dispatch } from './app/redux/store.js';
+import { checkAuth } from './app/redux/actions/auth-actions'
+import AuthNavigator from './AuthNavigator'
+import AppNavigator from './AppNavigator'
 
-import RootNavigator from './RootNavigator'
+class App extends Component {
 
-export default class App extends Component {
+  componentDidMount() {
+    dispatch(checkAuth())
+  }
+
   render() {
-    return (
-      <Provider store={store}>
-	      <RootNavigator />
-      </Provider>
-    );
+    const {isAuth} = this.props
+    if (isAuth) {
+      return (
+          <AppNavigator />
+      )
+    } else {
+      return (
+          <AuthNavigator />
+      )
+    }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    isAuth: state.isAuth
+  }
+}
+
+export default connect(mapStateToProps)(App)

@@ -1,4 +1,5 @@
 export default {
   red: '#FF5252',
-  darkGreay: ''
+  background: '#000000',
+  lightText: 'gray',
 }

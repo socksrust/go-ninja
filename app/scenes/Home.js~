@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
 import styled from 'styled-components/native'
 import RedInput from '../components/red-input'
-import theme from '../utils/theme'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
 import { login } from '../redux/actions/auth-actions'
@@ -14,11 +13,11 @@ const Wrapper = styled.View`
 `
 
 const Header = styled.View`
-  flex: 1.3;
+  flex: 3;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: ${theme.background};
+  background-color: black;
 `
 
 const Logo = styled.Text`
@@ -30,6 +29,11 @@ const SpanBold = styled.Text`
   font-weight: bold;
 `
 
+const HeaderSubtitles = styled.Text`
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+`
 const Form = styled.View`
   flex: 5;
   flex-direction: column;
@@ -61,15 +65,14 @@ const SpanRed = styled.Text`
 const LoginButton = styled.TouchableOpacity`
   background-color: rgb(255, 82, 82);
   width: 100%;
-  height: 45px;
+  height: 70px;
   margin-bottom: 0px;
   justify-content: center;
   align-items: center;
-  border-radius: 50;
 `
 
 const LoginText = styled.Text`
-  font-size: 24px;
+  font-size: 34px;
   color: #ffffff;
 `
 
@@ -105,6 +108,7 @@ class Home extends React.Component {
       <Wrapper>
         <Header>
           <Logo><SpanBold>Go</SpanBold> Ninja</Logo>
+          <HeaderSubtitles>Hire the bests freelancers around the world!</HeaderSubtitles>
         </Header>
         <Form>
           <FormTitle>Welcome back!</FormTitle>
@@ -118,15 +122,15 @@ class Home extends React.Component {
             secureTextEntry
             onChange={(e) => this.handlePasswordChange(e)}
           />
-          <LoginButton onPress={() => this.handleLoginPress()}>
-            {loginIsLoading ? (
-              <LoginText>Loading.... </LoginText>
-            ) : (
-              <LoginText>Login</LoginText>
-            )}
-          </LoginButton>
           <GoButton onPress={() => navigate('Signup')}><FormMessage>Not registered yet? <SpanRed>Sign up</SpanRed> here!</FormMessage></GoButton>
         </Form>
+        <LoginButton onPress={() => this.handleLoginPress()}>
+          {loginIsLoading ? (
+            <LoginText>Loading.... </LoginText>
+          ) : (
+            <LoginText>Login</LoginText>
+          )}
+        </LoginButton>
       </Wrapper>
     )
   }

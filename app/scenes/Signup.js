@@ -5,8 +5,7 @@ import RedInput from '../components/red-input'
 import Header from '../components/header'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
-import { fetchQuestions } from '../redux/actions/quizz-actions'
-import { Actions } from 'react-native-router-flux'
+import theme from '../utils/theme'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -43,16 +42,16 @@ const SpanRed = styled.Text`
 `
 
 const SignupButton = styled.TouchableOpacity`
-  background-color: rgb(255, 82, 82);
+  background-color: ${theme.red};
   width: 100%;
-  height: 70px;
-  margin-bottom: 0px;
+  height: 40px;
   justify-content: center;
   align-items: center;
+  border-radius: 50;
 `
 
 const SignupText = styled.Text`
-  font-size: 34px;
+  font-size: 24px;
   color: #ffffff;
 `
 
@@ -85,8 +84,8 @@ class Signup extends React.Component {
             placeholder='Password'
             secureTextEntry
           />
-        </Form>
         <SignupButton onPress={this.handleRegisterPress}><SignupText>Register</SignupText></SignupButton>
+        </Form>
       </Wrapper>
     )
   }

@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import questionsReducer from './reducers/questions-reducer';
+import authReducer from './reducers/auth-reducer';
 
 export let store = createStore(
-  questionsReducer,
+  authReducer,
   applyMiddleware(thunk)
 );
 

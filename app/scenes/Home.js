@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
 import styled from 'styled-components/native'
-import RedInput from '../components/red-input'
-import theme from '../utils/theme'
+import Header from '../components/header'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
 import { login } from '../redux/actions/auth-actions'
@@ -11,14 +10,6 @@ const Wrapper = styled.View`
   flex: 1;
   justify-content: flex-start;
   background-color: #ffffff;
-`
-
-const Header = styled.View`
-  flex: 1.3;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  background-color: ${theme.background};
 `
 
 const Logo = styled.Text`
@@ -30,6 +21,11 @@ const SpanBold = styled.Text`
   font-weight: bold;
 `
 
+const HeaderSubtitles = styled.Text`
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+`
 const Form = styled.View`
   flex: 5;
   flex-direction: column;
@@ -61,72 +57,28 @@ const SpanRed = styled.Text`
 const LoginButton = styled.TouchableOpacity`
   background-color: rgb(255, 82, 82);
   width: 100%;
-  height: 45px;
+  height: 70px;
   margin-bottom: 0px;
   justify-content: center;
   align-items: center;
-  border-radius: 50;
 `
 
 const LoginText = styled.Text`
-  font-size: 24px;
+  font-size: 34px;
   color: #ffffff;
 `
 
 class Home extends React.Component {
   static navigationOptions = {
-    header: null
+    header: Header
   };
 
-  constructor(props){
-    super(props)
-    this.state = {
-      email: '',
-      password: ''
-    }
-  }
-
-  handleLoginChange(e) {
-    this.setState({email: e.target.value})
-  }
-
-  handlePasswordChange(e) {
-    this.setState({password: e.target.value})
-  }
-
-  handleLoginPress() {
-    dispatch(login(this.state.email, this.state.password))
-  }
 
   render() {
     const { navigate } = this.props.navigation
     const {loginIsLoading} = this.props
     return(
       <Wrapper>
-        <Header>
-          <Logo><SpanBold>Go</SpanBold> Ninja</Logo>
-        </Header>
-        <Form>
-          <FormTitle>Welcome back!</FormTitle>
-          <RedInput
-            selectTextOnFocus
-            placeholder='Login'
-            onChange={(e) => this.handleLoginChange(e)}
-          />
-          <RedInput
-            placeholder='Password'
-            secureTextEntry
-            onChange={(e) => this.handlePasswordChange(e)}
-          />
-          <LoginButton onPress={() => this.handleLoginPress()}>
-            {loginIsLoading ? (
-              <LoginText>Loading.... </LoginText>
-            ) : (
-              <LoginText>Login</LoginText>
-            )}
-          </LoginButton>
-          <GoButton onPress={() => navigate('Signup')}><FormMessage>Not registered yet? <SpanRed>Sign up</SpanRed> here!</FormMessage></GoButton>
-        </Form>
       </Wrapper>
     )
   }
