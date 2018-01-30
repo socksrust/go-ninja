@@ -67,3 +67,38 @@ export function checkAuth(email, password) {
     )
   }
 }
+
+export function signup(email, password, firstName, lastName) {
+  return dispatch => {
+    dispatch({
+      type: 'SIGNUP_REQUEST'
+    })
+
+    const saveObj = {
+      email,
+      password,
+      firstName,
+      lastName
+    }
+    console.log(saveObj)
+    return fetch('https://goninja.herokuapp.com/user', {
+      method: 'POST',
+      data: saveObj
+    })
+    .then(payload => {
+      console.log(payload)
+      // AsyncStorage.setItem('loginId', payload.email)
+      dispatch({
+        type: 'SIGNUP_SUCCESS',
+        payload
+      })}
+    )
+    .catch(error =>{
+      console.log(error)
+      dispatch({
+        type: 'SIGNUP_FAILURE',
+        error
+      })}
+    )
+  }
+}
