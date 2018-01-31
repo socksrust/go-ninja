@@ -11,8 +11,13 @@ const Wrapper = styled.View`
   justify-content: center;
   align-items: stretch;
 `
+const HeaderContent = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
 
-const HeaderText = styled.Text`
+const HeaderTitle = styled.Text`
   font-size: 32px;
   color: #ffffff;
   margin-right: auto;
@@ -23,8 +28,19 @@ const HeaderText = styled.Text`
   padding-bottom: 10px;
 `
 
+const HeaderText = styled.Text`
+  font-size: 16px;
+  color: #007aff;
+  margin-right: 15px;
+  font-weight: bold;
+  padding-top: 24px;
+  padding-bottom: 10px;
+`
+
+const HeaderButton = styled.TouchableOpacity``
+
 const SearchInput = styled.TextInput`
-  border-radius: 5px;
+  border-radius: 15;
   height: 32px;
   margin-left: 8px;
   margin-right: 8px;
@@ -37,9 +53,12 @@ const SearchInput = styled.TextInput`
 
 const GenericHeader = props => (
   <Wrapper>
-    <HeaderText>
-      {props.text}
-    </HeaderText>
+    <HeaderContent>
+      <HeaderTitle>{props.text}</HeaderTitle>
+      <HeaderButton>
+        <HeaderText>Publish</HeaderText>
+      </HeaderButton>
+    </HeaderContent>
     <SearchInput placeholder='Search' placeholderTextColor='#8e8e93'/>
   </Wrapper>
 )

@@ -82,7 +82,7 @@ class Home extends React.Component {
       <Wrapper>
         <FlatList
           style={{backgroundColor: '#ffffff'}}
-          data={[{key: 'a'}, {key: 'b'}]}
+          data={[{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}, {key: 'f'}]}
           renderItem={({item}) => <JobCard />}
         />
       </Wrapper>
