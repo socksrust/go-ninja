@@ -42,7 +42,7 @@ const SpanRed = styled.Text`
 `
 
 const SignupButton = styled.TouchableOpacity`
-  background-color: ${theme.red};
+  background-color: #007aff;
   width: 100%;
   height: 40px;
   justify-content: center;
@@ -84,7 +84,9 @@ class Signup extends React.Component {
             placeholder='Password'
             secureTextEntry
           />
-        <SignupButton onPress={this.handleRegisterPress}><SignupText>Register</SignupText></SignupButton>
+        <SignupButton onPress={this.handleRegisterPress}>
+          <SignupText>Register</SignupText>
+        </SignupButton>
         </Form>
       </Wrapper>
     )

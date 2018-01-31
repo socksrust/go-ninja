@@ -20,7 +20,7 @@ class App extends Component {
 
   render() {
     const {isAuth} = this.props
-    if (!isAuth) {
+    if (isAuth) {
       return (
           <AppNavigator />
       )

@@ -18,7 +18,7 @@ const Header = styled.View`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: ${theme.background};
+  background-color:  #007aff;
 `
 
 const Logo = styled.Text`
@@ -55,11 +55,11 @@ const GoButton = styled.TouchableOpacity`
   background-color: white;
 `
 const SpanRed = styled.Text`
-  color: rgb(255, 82, 82);
+  color:  #007aff;
 `
 
 const LoginButton = styled.TouchableOpacity`
-  background-color: rgb(255, 82, 82);
+  background-color:  #007aff;
   width: 100%;
   height: 45px;
   margin-bottom: 0px;

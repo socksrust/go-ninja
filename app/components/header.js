@@ -5,8 +5,8 @@ import theme from '../utils/theme'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Wrapper = styled.View`
-  height: 70px;
-  background-color: ${theme.background};
+  height: 80px;
+  background-color: #007aff;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -22,6 +22,7 @@ const Logo = styled.Text`
   color: #ffffff;
   margin-right: auto;
   margin-left: -45px;
+  margin-top: 10px;
 `
 
 const BoldSpan = styled.Text`
