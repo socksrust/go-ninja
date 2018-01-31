@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, FlatList } from 'react-native'
 import styled from 'styled-components/native'
-import Header from '../components/header'
+import GenericHeader from '../components/generic-header'
+import JobCard from '../components/job-card'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
 import { login } from '../redux/actions/auth-actions'
@@ -69,16 +70,21 @@ const LoginText = styled.Text`
 `
 
 class Home extends React.Component {
+
   static navigationOptions = {
-    header: Header
+    header: <GenericHeader text='GoNinja'/>
   };
 
 
   render() {
     const { navigate } = this.props.navigation
-    const {loginIsLoading} = this.props
     return(
       <Wrapper>
+        <FlatList
+          style={{backgroundColor: '#ffffff'}}
+          data={[{key: 'a'}, {key: 'b'}]}
+          renderItem={({item}) => <JobCard />}
+        />
       </Wrapper>
     )
   }
