@@ -3,6 +3,7 @@ import { TextInput } from 'react-native'
 import styled from 'styled-components/native'
 import theme from '../utils/theme'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Badges from './badges'
 
 const Wrapper = styled.View`
   height: 140px;
@@ -90,28 +91,8 @@ const BadgesWrapper = styled.View`
   flex-direction: row;
 `
 
-const Badge = styled.View`
-  background-color: #007aff;
-  border-radius: 10;
-  align-items: center;
-  justify-content: center;
-  margin-right: 5px;
-  height: 17px;
-`
 
-const BadgeText = styled.Text`
-  font-size: 9.5px;
-  color: #ffffff;
-  padding: 0 6px 0 6px;
-`
-
-
-
-
-
-
-
-const GenericHeader = props => (
+const JobCard = props => (
   <Wrapper>
     <IconWrapper>
       <Icon name='file' size={38} color='#007aff' />
@@ -130,19 +111,13 @@ const GenericHeader = props => (
       <ContentSkills>
         <SkillsText>Skills</SkillsText>
         <BadgesWrapper>
-          <Badge>
-            <BadgeText>React</BadgeText>
-          </Badge>
-          <Badge>
-            <BadgeText>React Native</BadgeText>
-          </Badge>
-          <Badge>
-            <BadgeText>NodeJS</BadgeText>
-          </Badge>
+          <Badges
+            skills={['React', 'React-Native', 'Node']}
+          />
         </BadgesWrapper>
       </ContentSkills>
     </ContentWrapper>
   </Wrapper>
 )
 
-export default GenericHeader
+export default JobCard
