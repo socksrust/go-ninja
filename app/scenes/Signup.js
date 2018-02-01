@@ -5,6 +5,7 @@ import RedInput from '../components/red-input'
 import Header from '../components/header'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
+import { register } from '../redux/actions/auth-actions'
 import theme from '../utils/theme'
 
 const Wrapper = styled.View`
@@ -55,17 +56,48 @@ const SignupText = styled.Text`
   color: #ffffff;
 `
 
-class Signup extends React.Component {
+class Register extends React.Component {
   static navigationOptions = {
     header: Header
   };
 
-  handleLoginPress() {
+  constructor(props){
+    super(props)
+    this.state = {
+      firstName: '',
+      lastName: '',
+      username: '',
+      password: ''
+    }
+  }
 
+  handleFirstNameChange(text) {
+    this.setState({firstName: text})
+  }
+
+  handleLastNameChange(text) {
+    this.setState({lastName: text})
+  }
+
+  handleUsernameChange(text) {
+    this.setState({username: text})
+  }
+
+  handlePasswordChange(text) {
+    this.setState({password: text})
+  }
+
+  handleRegisterPress(){
+    dispatch(register(
+      this.state.firstName,
+      this.state.lastName,
+      this.state.username,
+      this.state.password
+    ))
   }
 
   render() {
-    const { navigate } = this.props.navigation
+    const { navigate, registerIsLoading } = this.props.navigation
     return(
       <Wrapper>
         <Form>
@@ -73,19 +105,27 @@ class Signup extends React.Component {
           <RedInput
             selectTextOnFocus
             placeholder='First Name'
+            onChangeText={(text) => this.handleFirstNameChange(text)}
           />
           <RedInput
             placeholder='Last Name'
+            onChangeText={(text) => this.handleLastNameChange(text)}
           />
           <RedInput
             placeholder='Email'
+            onChangeText={(text) => this.handleUsernameChange(text)}
           />
           <RedInput
             placeholder='Password'
             secureTextEntry
+            onChangeText={(text) => this.handlePasswordChange(text)}
           />
-        <SignupButton onPress={this.handleRegisterPress}>
-          <SignupText>Register</SignupText>
+        <SignupButton onPress={() => this.handleRegisterPress()}>
+          {registerIsLoading ? (
+            <SignupText>Loading.... </SignupText>
+          ) : (
+            <SignupText>Register</SignupText>
+          )}
         </SignupButton>
         </Form>
       </Wrapper>
@@ -93,4 +133,10 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup
+const mapStateToProps = state => {
+  return {
+    registerIsLoading: state.registerIsLoading
+  }
+}
+
+export default connect(mapStateToProps)(Register)

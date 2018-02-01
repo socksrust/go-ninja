@@ -86,15 +86,16 @@ class Home extends React.Component {
     }
   }
 
-  handleLoginChange(e) {
-    this.setState({email: e.target.value})
+  handleLoginChange(text) {
+    this.setState({email: text})
   }
 
-  handlePasswordChange(e) {
-    this.setState({password: e.target.value})
+  handlePasswordChange(text) {
+    this.setState({password: text})
   }
 
   handleLoginPress() {
+    console.log(this.state.email, this.state.password)
     dispatch(login(this.state.email, this.state.password))
   }
 
@@ -111,12 +112,12 @@ class Home extends React.Component {
           <RedInput
             selectTextOnFocus
             placeholder='Login'
-            onChange={(e) => this.handleLoginChange(e)}
+            onChangeText={(text) => this.handleLoginChange(text)}
           />
           <RedInput
             placeholder='Password'
             secureTextEntry
-            onChange={(e) => this.handlePasswordChange(e)}
+            onChangeText={(text) => this.handlePasswordChange(text)}
           />
           <LoginButton onPress={() => this.handleLoginPress()}>
             {loginIsLoading ? (

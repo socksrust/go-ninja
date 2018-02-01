@@ -10,7 +10,8 @@ const Input = styled.TextInput`
 `
 
 const RedInput = props => (
-  <Input {...props}
+  <Input
+    {...props}
     selectionColor={theme.red}
     underlineColorAndroid={theme.red}
   />

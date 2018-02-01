@@ -15,6 +15,7 @@ const Wrapper = styled.View`
 const ArrowButton = styled.TouchableOpacity`
   margin-right: auto;
   margin-left: 15px;
+  margin-top: 10px;
 `
 
 const Logo = styled.Text`

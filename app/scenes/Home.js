@@ -5,7 +5,7 @@ import GenericHeader from '../components/generic-header'
 import JobCard from '../components/job-card'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
-import { login } from '../redux/actions/auth-actions'
+import { login, logout } from '../redux/actions/auth-actions'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -72,9 +72,8 @@ const LoginText = styled.Text`
 class Home extends React.Component {
 
   static navigationOptions = {
-    header: <GenericHeader text='GoNinja'/>
+    header: <GenericHeader text='GoNinja' onPress={() => dispatch(logout())}/>
   };
-
 
   render() {
     const { navigate } = this.props.navigation

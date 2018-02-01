@@ -14,7 +14,7 @@ import AppNavigator from './AppNavigator'
 
 class App extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     dispatch(checkAuth())
   }
 

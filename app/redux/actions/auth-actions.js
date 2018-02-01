@@ -11,20 +11,29 @@ export function login(email, password) {
       password
     }
     console.log(saveObj)
-    return fetch('https://goninja.herokuapp.com/login', {
-      method: 'POST',
-      data: saveObj
+    fetch('https://goninja.herokuapp.com/login', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(saveObj)
     })
-    .then(payload => {
-      console.log(payload)
-      // AsyncStorage.setItem('loginId', payload.email)
+    .then(res => {
+      console.log(res)
+      if (res.ok) {
+        return AsyncStorage.setItem('loginId', res._bodyInit)
+      } else {
+        throw new Error(res._bodyInit.message)
+      }
+      return
+    })
+    .then(res =>
       dispatch({
-        type: 'LOGIN_SUCCESS',
-        payload
-      })}
+        type: 'LOGIN_SUCCESS'
+      })
     )
-    .catch(error =>{
-      console.log(error)
+    .catch(error => {
+      console.log('error', error)
       dispatch({
         type: 'LOGIN_FAILURE',
         error
@@ -35,12 +44,8 @@ export function login(email, password) {
 
 export function logout() {
   return dispatch => {
+    console.log('logout action')
     return AsyncStorage.removeItem('loginId')
-    .then(_ =>
-      dispatch({
-        type: 'LOGOUT_REQUEST'
-      })
-    )
     .then(_ =>
       dispatch({
         type: 'LOGOUT_SUCCESS'
@@ -60,9 +65,58 @@ export function checkAuth(email, password) {
     return AsyncStorage.getItem('loginId')
     .then(payload => {
       console.log('checkAuth', payload)
+      if (payload) {
+        dispatch({
+          type: 'CHECK_AUTH',
+          payload
+        })
+      } else {
+        return
+      }
+    })
+  }
+}
+
+export function register(firstName, lastName, email, password) {
+  return dispatch => {
+    dispatch({
+      type: 'REGISTER_REQUEST'
+    })
+
+    const saveObj = {
+      firstName,
+      lastName,
+      email,
+      password
+    }
+
+    console.log(saveObj)
+    fetch('https://goninja.herokuapp.com/users', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(saveObj)
+    })
+    .then(res => {
+      console.log(res)
+      if (res.ok) {
+        return AsyncStorage.setItem('loginId', res._bodyInit)
+      } else {
+        throw new Error(res._bodyInit.message)
+      }
+      return
+    })
+    .then(res =>
       dispatch({
-        type: 'CHECK_AUTH',
-        payload
+        type: 'REGISTER_SUCCESS'
+      })
+    )
+    .catch(error => {
+      console.log('error', error)
+      dispatch({
+        type: 'REGISTER_FAILURE',
+        error
       })}
     )
   }
