@@ -5,8 +5,8 @@ import RedInput from '../components/red-input'
 import Header from '../components/header'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
-import { register } from '../redux/actions/auth-actions'
 import theme from '../utils/theme'
+import {signup} from '../utils/firebase-api'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -88,12 +88,10 @@ class Register extends React.Component {
   }
 
   handleRegisterPress(){
-    dispatch(register(
-      this.state.firstName,
-      this.state.lastName,
+    signup(
       this.state.username,
       this.state.password
-    ))
+    )
   }
 
   render() {

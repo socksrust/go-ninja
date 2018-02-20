@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
 import Home from './app/scenes/Home'
+import Login from './app/scenes/Login'
+import Signup from './app/scenes/Signup'
 import { StackNavigator } from 'react-navigation';
 
-const AppNavigator = StackNavigator({
+const RootNavigator = StackNavigator({
+  Login: {
+    screen: Login,
+  },
+  Signup: {
+    screen: Signup,
+  },
   Home: {
-    screen: Home,
+    screen: Home
   }
 })
 
-export default AppNavigator
+export default RootNavigator

@@ -4,8 +4,7 @@ import styled from 'styled-components/native'
 import GenericHeader from '../components/generic-header'
 import JobCard from '../components/job-card'
 import { connect } from 'react-redux'
-import { dispatch } from '../redux/store'
-import { login, logout } from '../redux/actions/auth-actions'
+import { logout } from '../utils/firebase-api'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -72,13 +71,14 @@ const LoginText = styled.Text`
 class Home extends React.Component {
 
   static navigationOptions = {
-    header: <GenericHeader text='GoNinja' onPress={() => dispatch(logout())}/>
+    header: null
   };
 
   render() {
     const { navigate } = this.props.navigation
     return(
       <Wrapper>
+        <GenericHeader text='GoNinja' onPress={() => logout(this.props.navigation.navigate)}/>
         <FlatList
           style={{backgroundColor: '#ffffff'}}
           data={[{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}, {key: 'f'}]}

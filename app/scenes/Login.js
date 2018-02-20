@@ -5,7 +5,7 @@ import RedInput from '../components/red-input'
 import theme from '../utils/theme'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
-import { login } from '../redux/actions/auth-actions'
+import { login } from '../utils/firebase-api'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -95,8 +95,9 @@ class Home extends React.Component {
   }
 
   handleLoginPress() {
+    const { navigate } = this.props.navigation
     console.log(this.state.email, this.state.password)
-    dispatch(login(this.state.email, this.state.password))
+    login(this.state.email, this.state.password, navigate)
   }
 
   render() {

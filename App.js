@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import { store } from './app/redux/store.js';
 import { dispatch } from './app/redux/store.js';
 import { checkAuth } from './app/redux/actions/auth-actions'
-import AuthNavigator from './AuthNavigator'
 import AppNavigator from './AppNavigator'
 
 class App extends Component {
@@ -19,16 +18,7 @@ class App extends Component {
   }
 
   render() {
-    const {isAuth} = this.props
-    if (isAuth) {
-      return (
-          <AppNavigator />
-      )
-    } else {
-      return (
-          <AuthNavigator />
-      )
-    }
+    return <AppNavigator />
   }
 }
 
