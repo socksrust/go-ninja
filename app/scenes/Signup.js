@@ -6,7 +6,7 @@ import Header from '../components/header'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
 import theme from '../utils/theme'
-import {signup} from '../utils/firebase-api'
+import {signupAction} from '../redux/actions/auth-actions'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -35,6 +35,11 @@ const FormMessage = styled.Text`
   font-size: 16px;
 `
 
+const PasswordWrapper = styled.View`
+  width: 100%;
+  padding-bottom: 15px;
+`
+
 const GoButton = styled.TouchableOpacity`
   background-color: white;
 `
@@ -51,6 +56,13 @@ const SignupButton = styled.TouchableOpacity`
   border-radius: 50;
 `
 
+const ErrorText = styled.Text`
+  font-size: 14px;
+  color: red;
+  font-weight: 700;
+  margin-top: 7px;
+`
+
 const SignupText = styled.Text`
   font-size: 24px;
   color: #ffffff;
@@ -64,19 +76,9 @@ class Register extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      firstName: '',
-      lastName: '',
       username: '',
       password: ''
     }
-  }
-
-  handleFirstNameChange(text) {
-    this.setState({firstName: text})
-  }
-
-  handleLastNameChange(text) {
-    this.setState({lastName: text})
   }
 
   handleUsernameChange(text) {
@@ -88,36 +90,34 @@ class Register extends React.Component {
   }
 
   handleRegisterPress(){
-    signup(
+    const { navigate } = this.props.navigation
+    console.log('hey hey hey')
+    dispatch(signupAction(
       this.state.username,
-      this.state.password
-    )
+      this.state.password,
+      navigate
+    ))
   }
 
   render() {
-    const { navigate, registerIsLoading } = this.props.navigation
+    const { navigate } = this.props.navigation
+    const {registerIsLoading, authError} = this.props
     return(
       <Wrapper>
         <Form>
           <FormTitle>Be part of the Team!</FormTitle>
           <RedInput
-            selectTextOnFocus
-            placeholder='First Name'
-            onChangeText={(text) => this.handleFirstNameChange(text)}
-          />
-          <RedInput
-            placeholder='Last Name'
-            onChangeText={(text) => this.handleLastNameChange(text)}
-          />
-          <RedInput
             placeholder='Email'
             onChangeText={(text) => this.handleUsernameChange(text)}
           />
-          <RedInput
-            placeholder='Password'
-            secureTextEntry
-            onChangeText={(text) => this.handlePasswordChange(text)}
-          />
+          <PasswordWrapper>
+            <RedInput
+              placeholder='Password'
+              secureTextEntry
+              onChangeText={(text) => this.handlePasswordChange(text)}
+            />
+            <ErrorText>{authError ? authError: ' '}</ErrorText>
+          </PasswordWrapper>
         <SignupButton onPress={() => this.handleRegisterPress()}>
           {registerIsLoading ? (
             <SignupText>Loading.... </SignupText>
@@ -125,6 +125,7 @@ class Register extends React.Component {
             <SignupText>Register</SignupText>
           )}
         </SignupButton>
+        <GoButton onPress={() => navigate('Login')}><FormMessage>Already have an account? back to <SpanRed>Login</SpanRed></FormMessage></GoButton>
         </Form>
       </Wrapper>
     )
@@ -133,7 +134,8 @@ class Register extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    registerIsLoading: state.registerIsLoading
+    registerIsLoading: state.registerIsLoading,
+    authError: state.authError
   }
 }
 

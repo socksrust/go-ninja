@@ -1,6 +1,7 @@
 import {AsyncStorage} from 'react-native'
+import {login, signup} from '../../utils/firebase-api'
 
-export function login(email, password) {
+export function loginAction(email, password, navigate) {
   return dispatch => {
     dispatch({
       type: 'LOGIN_REQUEST'
@@ -10,32 +11,39 @@ export function login(email, password) {
       email,
       password
     }
-    console.log(saveObj)
-    fetch('https://goninja.herokuapp.com/login', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify(saveObj)
-    })
-    .then(res => {
-      console.log(res)
-      if (res.ok) {
-        return AsyncStorage.setItem('loginId', res._bodyInit)
-      } else {
-        throw new Error(res._bodyInit.message)
-      }
-      return
-    })
-    .then(res =>
+    return login(email, password, navigate)
+    .then(_ =>
       dispatch({
         type: 'LOGIN_SUCCESS'
       })
     )
     .catch(error => {
-      console.log('error', error)
+      console.log('errorssss', error)
       dispatch({
         type: 'LOGIN_FAILURE',
+        error
+      })}
+    )
+  }
+}
+
+export function signupAction(email, password, navigate) {
+  return dispatch => {
+    console.log('signupaction')
+    dispatch({
+      type: 'REGISTER_REQUEST'
+    })
+
+    return signup(email, password, navigate)
+    .then(res =>
+      dispatch({
+        type: 'REGISTER_SUCCESS'
+      })
+    )
+    .catch(error => {
+      console.log('signup error', error)
+      dispatch({
+        type: 'REGISTER_FAILURE',
         error
       })}
     )
@@ -74,85 +82,5 @@ export function checkAuth(email, password) {
         return
       }
     })
-  }
-}
-
-export function register(firstName, lastName, email, password) {
-  return dispatch => {
-    dispatch({
-      type: 'REGISTER_REQUEST'
-    })
-
-    const saveObj = {
-      firstName,
-      lastName,
-      email,
-      password
-    }
-
-    console.log(saveObj)
-    fetch('https://goninja.herokuapp.com/users', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify(saveObj)
-    })
-    .then(res => {
-      console.log(res)
-      if (res.ok) {
-        return AsyncStorage.setItem('loginId', res._bodyInit)
-      } else {
-        throw new Error(res._bodyInit.message)
-      }
-      return
-    })
-    .then(res =>
-      dispatch({
-        type: 'REGISTER_SUCCESS'
-      })
-    )
-    .catch(error => {
-      console.log('error', error)
-      dispatch({
-        type: 'REGISTER_FAILURE',
-        error
-      })}
-    )
-  }
-}
-
-export function signup(email, password, firstName, lastName) {
-  return dispatch => {
-    dispatch({
-      type: 'SIGNUP_REQUEST'
-    })
-
-    const saveObj = {
-      email,
-      password,
-      firstName,
-      lastName
-    }
-    console.log(saveObj)
-    return fetch('https://goninja.herokuapp.com/user', {
-      method: 'POST',
-      data: saveObj
-    })
-    .then(payload => {
-      console.log(payload)
-      // AsyncStorage.setItem('loginId', payload.email)
-      dispatch({
-        type: 'SIGNUP_SUCCESS',
-        payload
-      })}
-    )
-    .catch(error =>{
-      console.log(error)
-      dispatch({
-        type: 'SIGNUP_FAILURE',
-        error
-      })}
-    )
   }
 }

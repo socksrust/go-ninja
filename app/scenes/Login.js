@@ -5,7 +5,8 @@ import RedInput from '../components/red-input'
 import theme from '../utils/theme'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
-import { login } from '../utils/firebase-api'
+import { loginAction } from '../redux/actions/auth-actions'
+import Loading from '../components/loading'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -51,6 +52,10 @@ const FormMessage = styled.Text`
   font-size: 16px;
 `
 
+const PasswordWrapper = styled.View`
+  width: 100%;
+  padding-bottom: 15px;
+`
 const GoButton = styled.TouchableOpacity`
   background-color: white;
 `
@@ -66,6 +71,13 @@ const LoginButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-radius: 50;
+`
+
+const ErrorText = styled.Text`
+  font-size: 14px;
+  color: red;
+  font-weight: 700;
+  margin-top: 7px;
 `
 
 const LoginText = styled.Text`
@@ -96,13 +108,12 @@ class Home extends React.Component {
 
   handleLoginPress() {
     const { navigate } = this.props.navigation
-    console.log(this.state.email, this.state.password)
-    login(this.state.email, this.state.password, navigate)
+    dispatch(loginAction(this.state.email, this.state.password, navigate))
   }
 
   render() {
     const { navigate } = this.props.navigation
-    const {loginIsLoading} = this.props
+    const {loginIsLoading, authError} = this.props
     return(
       <Wrapper>
         <Header>
@@ -115,14 +126,17 @@ class Home extends React.Component {
             placeholder='Login'
             onChangeText={(text) => this.handleLoginChange(text)}
           />
-          <RedInput
-            placeholder='Password'
-            secureTextEntry
-            onChangeText={(text) => this.handlePasswordChange(text)}
-          />
+          <PasswordWrapper>
+            <RedInput
+              placeholder='Password'
+              secureTextEntry
+              onChangeText={(text) => this.handlePasswordChange(text)}
+            />
+            <ErrorText>{authError ? authError: ' '}</ErrorText>
+          </PasswordWrapper>
           <LoginButton onPress={() => this.handleLoginPress()}>
             {loginIsLoading ? (
-              <LoginText>Loading.... </LoginText>
+              <LoginText>Loading...</LoginText>
             ) : (
               <LoginText>Login</LoginText>
             )}
@@ -136,7 +150,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    loginIsLoading: state.loginIsLoading
+    loginIsLoading: state.loginIsLoading,
+    authError: state.authError
   }
 }
 

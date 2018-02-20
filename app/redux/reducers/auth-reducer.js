@@ -1,7 +1,8 @@
 const initialState = {
   loginIsLoading: false,
   registerIsLoading: false,
-  isAuth: false
+  isAuth: false,
+  authError: ''
 }
 
 const questionsRecucer = (state = initialState, action) => {
@@ -17,7 +18,6 @@ const questionsRecucer = (state = initialState, action) => {
     return newState
 
   case 'LOGIN_SUCCESS':
-    console.log('isAuth gonna be true')
     newState = Object.assign({}, state, {
       loginIsLoading: false,
       isAuth: true
@@ -26,12 +26,12 @@ const questionsRecucer = (state = initialState, action) => {
 
   case 'LOGIN_FAILURE':
     newState = Object.assign({}, state, {
-      loginIsLoading: false
+      loginIsLoading: false,
+      authError: action.error
     })
     return newState
   //logout
   case 'LOGOUT_SUCCESS':
-    console.log('lets Logout')
     newState = Object.assign({}, state, {
       isAuth: false
     })
@@ -45,16 +45,15 @@ const questionsRecucer = (state = initialState, action) => {
     return newState
 
   case 'REGISTER_SUCCESS':
-    console.log('isAuth gonna be true')
     newState = Object.assign({}, state, {
-      registerIsLoading: false,
-      isAuth: true
+      registerIsLoading: false
     })
     return newState
 
   case 'REGISTER_FAILURE':
     newState = Object.assign({}, state, {
-      registerIsLoading: false
+      registerIsLoading: false,
+      authError: action.error
     })
     return newState
 
