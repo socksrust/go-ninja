@@ -1,4 +1,6 @@
 import {firebasePublishJob} from '../../utils/firebase-api'
+import Snackbar from 'react-native-snackbar';
+import theme from '../../utils/theme'
 
 export function publishAction(jobTitle, skills, company, location, description) {
   return dispatch => {
@@ -16,8 +18,18 @@ export function publishAction(jobTitle, skills, company, location, description) 
 
     return firebasePublishJob(saveObj)
     .then(_ =>{
+      Snackbar.show({
+        title: 'Job posted! :D',
+        backgroundColor: theme.accentColor
+      })
       dispatch({
         type: 'ADD_ITEM_SUCCESS'
+      })
+    })
+    .catch(_ => {
+      Snackbar.show({
+        title: 'Your job couldn`t be posted, please fill all infos.',
+        backgroundColor: theme.alertColor
       })
     })
   }

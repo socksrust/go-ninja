@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Wrapper = styled.View`
   height: 80px;
-  background-color: #007aff;
+  background-color: ${theme.primaryColor};
   flex-direction: row;
   justify-content: center;
   align-items: center;

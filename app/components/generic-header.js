@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Wrapper = styled.View`
   height: 110px;
-  background-color: #ffffff;
+  background-color: ${theme.primaryColor};
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
@@ -19,8 +19,7 @@ const HeaderContent = styled.View`
 
 const HeaderTitle = styled.Text`
   font-size: 32px;
-  color: #ffffff;
-  color: black;
+  color: white;
   font-weight: bold;
   padding-top: 15px;
   padding-bottom: 10px;
@@ -28,7 +27,7 @@ const HeaderTitle = styled.Text`
 
 const HeaderText = styled.Text`
   font-size: 16px;
-  color: ${props => props.color ? props.color : '#007aff'};
+  color: ${props => props.color ? props.color : theme.text};
   ${props => props.left ? 'margin-left: 10px' : 'margin-right: 15px'};
   font-weight: bold;
   padding-top: 24px;
@@ -53,11 +52,11 @@ const GenericHeader = props => (
   <Wrapper>
     <HeaderContent>
       <HeaderButton onPress={() => props.onPress()}>
-        <HeaderText left color='gray'>Logout</HeaderText>
+        <HeaderText left color={theme.text}>Logout</HeaderText>
       </HeaderButton>
-      <HeaderTitle>{props.text}</HeaderTitle>
+      <HeaderTitle>GoNinja</HeaderTitle>
       <HeaderButton onPress={() => props.onPublishPress()}>
-        <HeaderText>Publish</HeaderText>
+        <HeaderText color={theme.text}>Publish</HeaderText>
       </HeaderButton>
     </HeaderContent>
     <SearchInput placeholder='Search' placeholderTextColor='#8e8e93'/>

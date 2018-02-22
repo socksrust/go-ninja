@@ -21,8 +21,9 @@ const Form = styled.View`
 `
 
 const FormTitle = styled.Text`
-  color: rgb(117, 117, 117);
+  color: ${theme.primaryText};
   font-size: 24px;
+  font-weight: 700;
 
 `
 
@@ -44,7 +45,7 @@ const SpanRed = styled.Text`
 `
 
 const PublishButton = styled.TouchableOpacity`
-  background-color: #007aff;
+  background-color: ${theme.primaryColor};
   width: 100%;
   height: 40px;
   justify-content: center;

@@ -25,9 +25,9 @@ const Form = styled.View`
 `
 
 const FormTitle = styled.Text`
-  color: rgb(117, 117, 117);
+  color: ${theme.primaryText};
   font-size: 24px;
-
+  font-weight: 700;
 `
 
 const FormMessage = styled.Text`
@@ -44,11 +44,11 @@ const GoButton = styled.TouchableOpacity`
   background-color: white;
 `
 const SpanRed = styled.Text`
-  color: rgb(255, 82, 82);
+  color: ${theme.accentColor};
 `
 
 const SignupButton = styled.TouchableOpacity`
-  background-color: #007aff;
+  background-color: ${theme.primaryColor};
   width: 100%;
   height: 40px;
   justify-content: center;
