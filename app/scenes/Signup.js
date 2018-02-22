@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native'
 import styled from 'styled-components/native'
 import RedInput from '../components/red-input'
 import Header from '../components/header'
@@ -120,7 +120,7 @@ class Register extends React.Component {
           </PasswordWrapper>
         <SignupButton onPress={() => this.handleRegisterPress()}>
           {registerIsLoading ? (
-            <SignupText>Loading.... </SignupText>
+            <ActivityIndicator size="large" color="#0000ff" />
           ) : (
             <SignupText>Register</SignupText>
           )}

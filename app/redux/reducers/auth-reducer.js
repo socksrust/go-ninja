@@ -57,14 +57,7 @@ const questionsRecucer = (state = initialState, action) => {
     })
     return newState
 
-  //check app auth
-  case 'CHECK_AUTH':
-    newState = Object.assign({}, state, {
-      isAuth: action.payload ? true : false
-    })
-    return newState
-
-    default:
+  default:
     return state
 
   }

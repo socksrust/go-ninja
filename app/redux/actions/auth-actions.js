@@ -68,19 +68,11 @@ export function logout() {
   }
 }
 
-export function checkAuth(email, password) {
+export function clearErrorMessage() {
   return dispatch => {
-    return AsyncStorage.getItem('loginId')
-    .then(payload => {
-      console.log('checkAuth', payload)
-      if (payload) {
-        dispatch({
-          type: 'CHECK_AUTH',
-          payload
-        })
-      } else {
-        return
-      }
+    dispatch({
+      type: 'CLEAR_ERROR_MESSAGE'
     })
   }
 }
+

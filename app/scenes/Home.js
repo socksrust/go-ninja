@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, FlatList, ActivityIndicator } from 'react-native'
 import styled from 'styled-components/native'
+import theme from '../utils/theme'
 import GenericHeader from '../components/generic-header'
 import JobCard from '../components/job-card'
 import { connect } from 'react-redux'
@@ -12,61 +13,13 @@ const Wrapper = styled.View`
   background-color: #ffffff;
 `
 
-const Logo = styled.Text`
-  color: #ffffff;
-  font-size: 59px;
-`
-
-const SpanBold = styled.Text`
-  font-weight: bold;
-`
-
-const HeaderSubtitles = styled.Text`
-  color: #ffffff;
-  font-size: 20px;
-  text-align: center;
-`
-const Form = styled.View`
-  flex: 5;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #ffffff;
-  margin-vertical: 20px;
-  margin-horizontal: 30px;
-`
-
-const FormTitle = styled.Text`
-  color: rgb(117, 117, 117);
-  font-size: 24px;
-
-`
-
-const FormMessage = styled.Text`
-  color: rgb(117, 117, 117);
-  font-size: 16px;
-`
-
-const GoButton = styled.TouchableOpacity`
-  background-color: white;
-`
-const SpanRed = styled.Text`
-  color: rgb(255, 82, 82);
-`
-
-const LoginButton = styled.TouchableOpacity`
-  background-color: rgb(255, 82, 82);
-  width: 100%;
-  height: 70px;
-  margin-bottom: 0px;
+const IndicatorWrapper = styled.View`
+  flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: #ffffff;
 `
 
-const LoginText = styled.Text`
-  font-size: 34px;
-  color: #ffffff;
-`
 
 class Home extends React.Component {
 
@@ -97,11 +50,18 @@ class Home extends React.Component {
           onPress={() => logout(this.props.navigation.navigate)}
           onPublishPress={() => this.props.navigation.navigate('Publish')}
         />
-        <FlatList
-          style={{backgroundColor: '#ffffff'}}
-          data={this.state.messages}
-          renderItem={({item}) => <JobCard key={item.key} job={item} />}
-        />
+        {this.state.messages.length !== 0 ? (
+          <FlatList
+            style={{backgroundColor: '#ffffff'}}
+            data={this.state.messages}
+            renderItem={({item}) => <JobCard key={item.key} job={item} />}
+          />) : (
+            <IndicatorWrapper>
+              <ActivityIndicator size='large' color={theme.primaryColor}/>
+            </IndicatorWrapper>
+          )
+        }
+
       </Wrapper>
     )
   }

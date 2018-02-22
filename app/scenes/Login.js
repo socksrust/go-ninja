@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native'
 import styled from 'styled-components/native'
 import RedInput from '../components/red-input'
 import theme from '../utils/theme'
@@ -136,7 +136,7 @@ class Home extends React.Component {
           </PasswordWrapper>
           <LoginButton onPress={() => this.handleLoginPress()}>
             {loginIsLoading ? (
-              <LoginText>Loading...</LoginText>
+              <ActivityIndicator size="small" color="#fffff" />
             ) : (
               <LoginText>Login</LoginText>
             )}
