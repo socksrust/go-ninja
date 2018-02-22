@@ -52,11 +52,13 @@ const JobBasicInfos = styled.View`
 const JobTitle = styled.Text`
   color: #434b52;
   font-size: 19px;
+  font-weight: 700;
 `
 
 const CompanyName = styled.Text`
   color: #2f80ed;
   font-size: 14px;
+  font-weight: 500;
 `
 
 const JobLocationInfos = styled.View`
@@ -84,6 +86,7 @@ const SkillsText = styled.Text`
   color: #828282;
   margin-right: auto;
   margin-bottom: 10px;
+  font-weight: 500;
 `
 
 const BadgesWrapper = styled.View`
@@ -92,27 +95,24 @@ const BadgesWrapper = styled.View`
 `
 
 
-const JobCard = props => (
+const JobCard = ({job}) => (
   <Wrapper>
-    <IconWrapper>
-      <Icon name='file' size={38} color='#007aff' />
-    </IconWrapper>
     <ContentWrapper>
       <ContentHead>
         <JobBasicInfos>
-          <JobTitle>Front end dev</JobTitle>
-          <CompanyName>Apple</CompanyName>
+          <JobTitle>{job && job.jobTitle}</JobTitle>
+          <CompanyName>{job &&job.company}</CompanyName>
         </JobBasicInfos>
         <JobLocationInfos>
           <Icon name='map-marker' size={12} color='#2f80ed' />
-          <JobLocationText>Vancouver, CA</JobLocationText>
+          <JobLocationText>{job && job.location}</JobLocationText>
         </JobLocationInfos>
       </ContentHead>
       <ContentSkills>
         <SkillsText>Skills</SkillsText>
         <BadgesWrapper>
           <Badges
-            skills={['React', 'React-Native', 'Node']}
+            skills={job && job.skills}
           />
         </BadgesWrapper>
       </ContentSkills>

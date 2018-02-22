@@ -1,4 +1,4 @@
-import {Firebase} from '../../index'
+import { Firebase } from '../../index'
 import { NavigationActions } from 'react-navigation';
 
 export async function signup(email, pass, navigate) {
@@ -28,3 +28,13 @@ export async function logout(navigate) {
       console.log(error);
   }
 }
+
+function PublishJob(item){
+  Firebase.database().ref('/joblist').push(item)
+}
+
+export const firebasePublishJob = (item) => new Promise((resolve, reject) => {
+  resolve(PublishJob(item))
+})
+
+export const joblistRef = () => Firebase.database().ref('/joblist').orderByKey().limitToLast(100)

@@ -7,7 +7,9 @@ import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
 import theme from '../utils/theme'
 import {signupAction} from '../redux/actions/auth-actions'
+import {publishAction} from '../redux/actions/publish-actions'
 import TextArea from '../components/text-area'
+
 const Form = styled.View`
   flex: 5;
   flex-direction: column;
@@ -79,11 +81,12 @@ class Register extends React.Component {
 
   handlePublishPress(){
     const { navigate } = this.props.navigation
-    console.log('hey hey hey')
     dispatch(publishAction(
-      this.state.username,
-      this.state.password,
-      navigate
+      this.state.jobTitle,
+      this.state.skills,
+      this.state.company,
+      this.state.location,
+      this.state.description
     ))
   }
 
@@ -106,6 +109,10 @@ class Register extends React.Component {
           <RedInput
             placeholder='Company'
             onChangeText={(text) => this.setState({company: text})}
+          />
+          <RedInput
+            placeholder='Location: City, STATE'
+            onChangeText={(text) => this.setState({location: text})}
           />
           <TextArea
             placeholder='Job Description'

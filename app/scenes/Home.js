@@ -4,7 +4,7 @@ import styled from 'styled-components/native'
 import GenericHeader from '../components/generic-header'
 import JobCard from '../components/job-card'
 import { connect } from 'react-redux'
-import { logout } from '../utils/firebase-api'
+import { logout, joblistRef } from '../utils/firebase-api'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -70,19 +70,37 @@ const LoginText = styled.Text`
 
 class Home extends React.Component {
 
+  constructor(props){
+    super(props)
+    this.state = {
+      messages: []
+    }
+  }
   static navigationOptions = {
     header: null
   };
+
+  componentDidMount() {
+    joblistRef().on('child_added', (snap) => {
+      const message = snap.val()
+      this.setState({ messages: [message].concat(this.state.messages) });
+      console.log(message)
+    })
+  }
 
   render() {
     const { navigate } = this.props.navigation
     return(
       <Wrapper>
-        <GenericHeader text='GoNinja' onPress={() => logout(this.props.navigation.navigate)}/>
+        <GenericHeader
+          text='GoNinja'
+          onPress={() => logout(this.props.navigation.navigate)}
+          onPublishPress={() => this.props.navigation.navigate('Publish')}
+        />
         <FlatList
           style={{backgroundColor: '#ffffff'}}
-          data={[{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}, {key: 'f'}]}
-          renderItem={({item}) => <JobCard />}
+          data={this.state.messages}
+          renderItem={({item}) => <JobCard key={item.key} job={item} />}
         />
       </Wrapper>
     )

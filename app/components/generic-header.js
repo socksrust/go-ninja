@@ -56,7 +56,7 @@ const GenericHeader = props => (
         <HeaderText left color='gray'>Logout</HeaderText>
       </HeaderButton>
       <HeaderTitle>{props.text}</HeaderTitle>
-      <HeaderButton>
+      <HeaderButton onPress={() => props.onPublishPress()}>
         <HeaderText>Publish</HeaderText>
       </HeaderButton>
     </HeaderContent>
