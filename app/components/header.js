@@ -32,7 +32,7 @@ const BoldSpan = styled.Text`
 
 const RedInput = props => (
   <Wrapper>
-    <ArrowButton onPress={() => props.navigation.navigate('Login')}>
+    <ArrowButton onPress={() => props.navigation.navigate(props.link ? props.link : 'Login')}>
       <Icon name="arrow-left" size={35} color="#ffffff" />
     </ArrowButton>
     <Logo>
