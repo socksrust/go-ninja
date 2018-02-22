@@ -14,6 +14,7 @@ const RedInput = props => (
     {...props}
     selectionColor={theme.red}
     underlineColorAndroid={theme.red}
+    autoCapitalize='none'
   />
 )
 

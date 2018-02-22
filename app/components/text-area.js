@@ -6,7 +6,7 @@ import styled from 'styled-components/native'
 const Input = styled.TextInput`
   text-align: left;
   width: 100%;
-  height: 300px;
+  height: 230px;
 `
 
 

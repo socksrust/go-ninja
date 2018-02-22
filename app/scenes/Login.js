@@ -136,7 +136,7 @@ class Home extends React.Component {
           </PasswordWrapper>
           <LoginButton onPress={() => this.handleLoginPress()}>
             {loginIsLoading ? (
-              <ActivityIndicator size="small" color="#fffff" />
+              <ActivityIndicator size="small" color="#ffffff" />
             ) : (
               <LoginText>Login</LoginText>
             )}
