@@ -139,7 +139,7 @@ class Home extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation
-    const {loginIsLoading, authError} = this.props
+    const {loginIsLoading, facebookLoginIsLoading, authError} = this.props
     return(
       <Wrapper>
         <Header>
@@ -170,7 +170,11 @@ class Home extends React.Component {
             </LoginButton>
             <Text>Or</Text>
             <FacebookButton onPress={() => this.handleFacebookLoginPress()}>
+              {facebookLoginIsLoading ? (
+                <ActivityIndicator size="small" color="#ffffff" />
+              ) : (
                 <LoginText>Sign in with facebook</LoginText>
+              )}
             </FacebookButton>
           </LoginButtonsWrapper>
           <GoButton onPress={() => navigate('Signup')}><FormMessage>Not registered yet? <SpanRed>Sign up</SpanRed> here!</FormMessage></GoButton>
@@ -183,6 +187,7 @@ class Home extends React.Component {
 const mapStateToProps = state => {
   return {
     loginIsLoading: state.loginIsLoading,
+    facebookLoginIsLoading: state.facebookLoginIsLoading,
     authError: state.authError
   }
 }

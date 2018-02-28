@@ -30,19 +30,19 @@ export function loginAction(email, password, navigate) {
 export function facebookLoginAction(navigate) {
   return dispatch => {
     dispatch({
-      type: 'LOGIN_REQUEST'
+      type: 'FACEBOOK_LOGIN_REQUEST'
     })
 
     return facebookLogin(navigate)
     .then(_ =>
       dispatch({
-        type: 'LOGIN_SUCCESS'
+        type: 'FACEBOOK_LOGIN_SUCCESS'
       })
     )
     .catch(error => {
       console.log('errorssss', error)
       dispatch({
-        type: 'LOGIN_FAILURE',
+        type: 'FACEBOOK_LOGIN_FAILURE',
         error
       })}
     )

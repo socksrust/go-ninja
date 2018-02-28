@@ -1,6 +1,38 @@
 import { Firebase } from '../../index'
 import { NavigationActions } from 'react-navigation';
-import { FBLoginManager } from 'react-native-facebook-login';
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
+import firebase from 'react-native-firebase'
+
+// Calling the following function will open the FB login dialogue:
+export const facebookLogin = async (navigate) => {
+  try {
+    const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
+
+    if (result.isCancelled) {
+      throw new Error('User cancelled request'); // Handle this however fits the flow of your app
+    }
+
+    console.log(`Login success with permissions: ${result.grantedPermissions.toString()}`);
+
+    // get the access token
+    const data = await AccessToken.getCurrentAccessToken();
+
+    if (!data) {
+      throw new Error('Something went wrong obtaining the users access token'); // Handle this however fits the flow of your app
+    }
+
+    // create a new firebase credential with the token
+    const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+
+    // login with credential
+    const currentUser = await firebase.auth().signInWithCredential(credential);
+
+    navigate('Home')
+    console.info(JSON.stringify(currentUser.toJSON()))
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 export async function signup(email, pass, navigate) {
   try {
@@ -47,19 +79,6 @@ const Facebook = {
     });
   }
 }
-const Auth = { Facebook };
-
-const fbLoginPermissions = ['email'];
-
-export const facebookLogin = (navigate) => (
-  Auth.Facebook.login(fbLoginPermissions)
-    .then((token) => {
-      console.log(Firebase.auth)
-      Firebase.auth().signInWithCredential(Firebase.auth.FacebookAuthProvider().credential(token))
-      navigate('Home')
-    })
-    .catch((err) => console.log(err))
-);
 
 export async function logout(navigate) {
   try {

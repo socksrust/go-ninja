@@ -1,4 +1,5 @@
 const initialState = {
+  facebookLoginIsLoading: false,
   loginIsLoading: false,
   registerIsLoading: false,
   isAuth: false,
@@ -27,6 +28,26 @@ const questionsRecucer = (state = initialState, action) => {
   case 'LOGIN_FAILURE':
     newState = Object.assign({}, state, {
       loginIsLoading: false,
+      authError: action.error
+    })
+    return newState
+  //logout
+  case 'FACEBOOK_LOGIN_REQUEST':
+    newState = Object.assign({}, state, {
+      facebookLoginIsLoading: true
+    })
+    return newState
+
+  case 'FACEBOOK_LOGIN_SUCCESS':
+    newState = Object.assign({}, state, {
+      facebookLoginIsLoading: false,
+      isAuth: true
+    })
+    return newState
+
+  case 'FACEBOOK_LOGIN_FAILURE':
+    newState = Object.assign({}, state, {
+      facebookLoginIsLoading: false,
       authError: action.error
     })
     return newState

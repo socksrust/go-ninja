@@ -137,6 +137,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fbsdk')
+    compile(project(':react-native-firebase')) {
+        transitive = false
+    }
     compile project(':react-native-facebook-login')
     compile project(':react-native-snackbar')
     compile project(':react-native-vector-icons')
