@@ -27,13 +27,13 @@ export function loginAction(email, password, navigate) {
   }
 }
 
-export function facebookLoginAction() {
+export function facebookLoginAction(navigate) {
   return dispatch => {
     dispatch({
       type: 'LOGIN_REQUEST'
     })
 
-    return facebookLogin()
+    return facebookLogin(navigate)
     .then(_ =>
       dispatch({
         type: 'LOGIN_SUCCESS'

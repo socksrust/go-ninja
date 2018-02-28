@@ -133,7 +133,8 @@ class Home extends React.Component {
   }
 
   handleFacebookLoginPress() {
-    dispatch(facebookLoginAction())
+    const { navigate } = this.props.navigation
+    dispatch(facebookLoginAction(navigate))
   }
 
   render() {
