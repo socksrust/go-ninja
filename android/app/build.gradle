@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-facebook-login')
     compile project(':react-native-snackbar')
     compile project(':react-native-vector-icons')
     compile fileTree(dir: "libs", include: ["*.jar"])

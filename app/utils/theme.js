@@ -3,6 +3,7 @@ export default {
   darkPrimaryColor: '#303F9F', //Dark Blue
   lightPrimaryColor: '#C5CAE9', //Light blue
   primaryColor: '#3F51B5', //Blue
+  facebookColor: '#3c50e8',
 
   text: '#FFFFFF', //white
   primaryText: '#212121', //Black

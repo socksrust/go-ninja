@@ -1,5 +1,5 @@
 import {AsyncStorage} from 'react-native'
-import {login, signup} from '../../utils/firebase-api'
+import {facebookLogin, login, signup} from '../../utils/firebase-api'
 
 export function loginAction(email, password, navigate) {
   return dispatch => {
@@ -26,6 +26,29 @@ export function loginAction(email, password, navigate) {
     )
   }
 }
+
+export function facebookLoginAction() {
+  return dispatch => {
+    dispatch({
+      type: 'LOGIN_REQUEST'
+    })
+
+    return facebookLogin()
+    .then(_ =>
+      dispatch({
+        type: 'LOGIN_SUCCESS'
+      })
+    )
+    .catch(error => {
+      console.log('errorssss', error)
+      dispatch({
+        type: 'LOGIN_FAILURE',
+        error
+      })}
+    )
+  }
+}
+
 
 export function signupAction(email, password, navigate) {
   return dispatch => {

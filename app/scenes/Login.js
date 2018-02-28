@@ -5,7 +5,7 @@ import RedInput from '../components/red-input'
 import theme from '../utils/theme'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
-import { loginAction } from '../redux/actions/auth-actions'
+import { loginAction, facebookLoginAction } from '../redux/actions/auth-actions'
 import Loading from '../components/loading'
 
 const Wrapper = styled.View`
@@ -63,6 +63,12 @@ const SpanRed = styled.Text`
   color:  ${theme.accentColor};
 `
 
+const LoginButtonsWrapper = styled.View`
+  width: 100%;
+  display: flex;
+  align-items: center;
+`
+
 const LoginButton = styled.TouchableOpacity`
   background-color: ${theme.primaryColor};
   width: 100%;
@@ -71,6 +77,21 @@ const LoginButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-radius: 50;
+  margin-bottom: 7px;
+`
+
+const FacebookButton = styled.TouchableOpacity`
+  background-color: ${theme.facebookColor};
+  width: 100%;
+  height: 40px;
+  margin-bottom: 0px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5;
+  margin-top: 7px;
+  shadow-offset: { width: 0, height: 0 };
+  shadow-opacity: 0.25;
+  shadow-radius: 5;
 `
 
 const ErrorText = styled.Text`
@@ -111,6 +132,10 @@ class Home extends React.Component {
     dispatch(loginAction(this.state.email, this.state.password, navigate))
   }
 
+  handleFacebookLoginPress() {
+    dispatch(facebookLoginAction())
+  }
+
   render() {
     const { navigate } = this.props.navigation
     const {loginIsLoading, authError} = this.props
@@ -134,13 +159,19 @@ class Home extends React.Component {
             />
             <ErrorText>{authError ? authError: ' '}</ErrorText>
           </PasswordWrapper>
-          <LoginButton onPress={() => this.handleLoginPress()}>
-            {loginIsLoading ? (
-              <ActivityIndicator size="small" color="#ffffff" />
-            ) : (
-              <LoginText>Login</LoginText>
-            )}
-          </LoginButton>
+          <LoginButtonsWrapper>
+            <LoginButton onPress={() => this.handleLoginPress()}>
+              {loginIsLoading ? (
+                <ActivityIndicator size="small" color="#ffffff" />
+              ) : (
+                <LoginText>Login</LoginText>
+              )}
+            </LoginButton>
+            <Text>Or</Text>
+            <FacebookButton onPress={() => this.handleFacebookLoginPress()}>
+                <LoginText>Sign in with facebook</LoginText>
+            </FacebookButton>
+          </LoginButtonsWrapper>
           <GoButton onPress={() => navigate('Signup')}><FormMessage>Not registered yet? <SpanRed>Sign up</SpanRed> here!</FormMessage></GoButton>
         </Form>
       </Wrapper>
