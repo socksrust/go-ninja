@@ -6,9 +6,6 @@ import Publish from './app/scenes/Publish'
 import { StackNavigator } from 'react-navigation';
 
 const RootNavigator = StackNavigator({
-  Publish: {
-    screen: Publish
-  },
   Login: {
     screen: Login,
   },
@@ -17,6 +14,9 @@ const RootNavigator = StackNavigator({
   },
   Home: {
     screen: Home
+  },
+  Publish: {
+    screen: Publish
   }
 })
 
