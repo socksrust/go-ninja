@@ -4,7 +4,7 @@ import styled from 'styled-components/native'
 import theme from '../utils/theme'
 
 const BadgeWrapper = styled.View`
-  background-color: #007aff;
+  background-color: ${theme.primaryColor};
   border-radius: 10;
   align-items: center;
   justify-content: center;

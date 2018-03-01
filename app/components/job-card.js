@@ -5,7 +5,7 @@ import theme from '../utils/theme'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Badges from './badges'
 
-const Wrapper = styled.View`
+const Wrapper = styled.TouchableOpacity`
   height: 140px;
   flex: 1;
   background-color: #ffffff;
@@ -95,8 +95,8 @@ const BadgesWrapper = styled.View`
 `
 
 
-const JobCard = ({job}) => (
-  <Wrapper>
+const JobCard = ({navigate, job}) => (
+  <Wrapper onPress={() => navigate('Job', {job})}>
     <ContentWrapper>
       <ContentHead>
         <JobBasicInfos>

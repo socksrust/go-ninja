@@ -91,7 +91,6 @@ class Register extends React.Component {
 
   handleRegisterPress(){
     const { navigate } = this.props.navigation
-    console.log('hey hey hey')
     dispatch(signupAction(
       this.state.username,
       this.state.password,

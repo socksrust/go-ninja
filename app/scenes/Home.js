@@ -37,7 +37,6 @@ class Home extends React.Component {
     joblistRef().on('child_added', (snap) => {
       const message = snap.val()
       this.setState({ messages: [message].concat(this.state.messages) });
-      console.log(message)
     })
   }
 
@@ -54,7 +53,7 @@ class Home extends React.Component {
           <FlatList
             style={{backgroundColor: '#ffffff'}}
             data={this.state.messages}
-            renderItem={({item}) => <JobCard key={item.key} job={item} />}
+            renderItem={({item}) => <JobCard key={item.key} job={item} navigate={navigate} />}
           />) : (
             <IndicatorWrapper>
               <ActivityIndicator size='large' color={theme.primaryColor}/>
