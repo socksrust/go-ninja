@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, Linking, View } from 'react-native'
+import { TextInput, Linking, View, ScrollView } from 'react-native'
 import styled from 'styled-components/native'
 import theme from '../utils/theme'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -105,6 +105,7 @@ const ContentSkills = styled.View`
   align-items: center;
   border-radius: 20;
   max-height: 45px;
+  margin-bottom: 10px;
 `
 
 const ContentDescription = styled.View`
@@ -143,7 +144,7 @@ const ChatButton = styled.TouchableOpacity`
   shadow-opacity: 0.15;
   shadow-radius: 20;
   elevation: 1;
-  height: 90px;
+  height: 70px;
   width: 100%;
 `
 
@@ -203,9 +204,11 @@ class Job extends React.Component {
                 <JobLocationText>{job && job.location}</JobLocationText>
               </JobLocationInfos>
             </ContentHead>
-            <ContentDescription>
-              {jobDescriptionEl}
-            </ContentDescription>
+            <ScrollView>
+              <ContentDescription>
+                {jobDescriptionEl}
+              </ContentDescription>
+            </ScrollView>
             <ContentSkills>
               <SkillsText>Skills</SkillsText>
               <BadgesWrapper>
